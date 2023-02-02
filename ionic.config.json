@@ -1,0 +1,7 @@
+{
+  "name": "gesco-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
