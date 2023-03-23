@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Gestion des cours</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" size="large" (click)="btnBack()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h5>Récap des cours</h5>
+
+  <div *ngIf="coursIsEmpty else loading">
+    <p class="no-absence">Pas de cours...</p>
+  </div>
+  <ng-template #loading>
+    <ion-searchbar
+      placeholder="Recherchez un cours"
+      [(ngModel)]="searchItem"
+      showCancelButton="focus"
+      animated>
+    </ion-searchbar>
+    <ion-card *ngFor="let cour of cours | filter:searchItem">
+      <ion-card-header>
+        <ion-card-title>{{ cour.titre }}</ion-card-title>
+        <ion-card-subtitle>{{ dateParser(cour.date) }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ cour.description }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <ion-fab color="primary" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openModalCours()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

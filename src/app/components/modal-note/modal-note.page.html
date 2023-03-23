@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Enregistrer une note</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="note">
+    <ion-item>
+      <ion-label position="stacked">Entrer l'année scolaire</ion-label>
+      <ion-input type="text" placeholder="Ex: 2022-2023" [(ngModel)]="note.annee_scolaire"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Sélectionner une séquence</ion-label>
+      <ion-select [(ngModel)]="note.sequence">
+        <ion-select-option *ngFor="let sequence of sequences" value="{{ sequence }}">{{ sequence }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Sélectionner une matière</ion-label>
+      <ion-select [(ngModel)]="note.matiere">
+        <ion-select-option *ngFor="let matiere of matieres" value="{{ matiere.intitule }}">{{ matiere.intitule }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Sélectionner un élève</ion-label>
+      <ion-select [(ngModel)]="note.student">
+        <ion-select-option *ngFor="let student of students" value="{{student.nom + ' ' + student.prenom}}">
+          {{student.nom + ' ' + student.prenom}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Entrer la note</ion-label>
+      <ion-input type="text" [(ngModel)]="note.note"></ion-input>
+    </ion-item>
+  </div><br><br>
+
+  <ion-button expand="block" color="primary" (click)="addNote(note)">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    Enregistrer
+  </ion-button>
+</ion-content>

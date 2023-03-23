@@ -1,0 +1,82 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item href="/voir-note">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <ion-label class="item">Voir les notes</ion-label>
+      </ion-item>
+      
+      <ion-item href="/voir-cours">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label class="item">Voir les cours</ion-label>
+      </ion-item>
+      
+      <ion-item href="/voir-absence">
+        <ion-icon name="today-outline"></ion-icon>
+        <ion-label class="item">Voir les absences</ion-label>
+      </ion-item>
+      
+      <ion-item href="/voir-devoir">
+        <ion-icon name="journal-outline"></ion-icon>
+        <ion-label class="item">Voir les devoirs</ion-label>
+      </ion-item>
+
+      <ion-item href="/message-parent">
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <ion-label class="item">Messages</ion-label>
+      </ion-item>
+
+      <ion-item href="/profile-parent">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label class="item">Mon Compte</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-label class="footer-label">Développé par Yehiel Yanou</ion-label><br>
+  </ion-footer>
+</ion-menu>
+
+<div class="ion-page" id="main-content"> 
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Accueil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <h5>BIENVENU SUR <span>GESCO</span></h5>
+    <ion-card>
+      <img alt="" src="../../../assets/img/teaching.png" />
+    
+      <ion-card-content>
+        En tant que maître, gérez votre classe comme il se doit. 
+        Des fonctionnalités sont là pour vous facilitez la tâche.
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <img alt="" src="../../../assets/img/teaching2.png" />
+    
+      <ion-card-content>
+        Parents, soyez informés en temps et en heure de ce que votre enfant fait
+        à l'école et de l'enseignement qu'il reçoit.
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <img alt="" src="../../../assets/img/banner.png" />
+    
+      <ion-card-content>
+        Si vous êtes un parent d'élève, vous avez la possibilité d'être informé d'éventuels
+        évènements à l'école à partir de votre interface
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>

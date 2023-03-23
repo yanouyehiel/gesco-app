@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" size="large" (click)="btnBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title>Voir les notes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h5>Récap des notes</h5>
+
+  <div *ngIf="noteIsEmpty else loading">
+    <p class="no-absence">Pas de notes...</p>
+  </div>
+  
+  <ng-template #loading>
+    <ion-searchbar
+      placeholder="Filtrer votre recherche"
+      [(ngModel)]="searchItem"
+      showCancelButton="focus"
+      animated>
+    </ion-searchbar>
+
+    <ion-card *ngFor="let note of notes">
+      <ion-card-header>
+        <ion-card-title>{{ note.student }}</ion-card-title>
+        <ion-card-subtitle>Année scolaire: {{ note.annee_scolaire }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="note-content">
+          <p>Matière: {{ note.matiere }}</p>
+          <p>Note: {{ note.note }}/20</p>
+          <p>Sequence: {{ note.sequence }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

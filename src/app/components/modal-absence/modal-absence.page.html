@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Enregistrer une absence</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="absence">
+    <ion-item>
+      <ion-label position="stacked">Nom de l'élèvre</ion-label>
+      <ion-select [(ngModel)]="absence.student">
+        <ion-select-option *ngFor="let student of students" value="{{ student.nom + ' ' + student.prenom}}">{{ student.nom + ' ' + student.prenom}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Date d'absence</ion-label>
+      <ion-input type="date" [(ngModel)]="absence.date"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Période d'absence</ion-label>
+      <ion-select [(ngModel)]="absence.periode">
+        <ion-select-option *ngFor="let periode of periodes" value="{{ periode }}">{{ periode }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div><br><br>
+
+  <ion-button expand="block" color="primary" (click)="addAbsence(absence)">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    Enregistrer
+  </ion-button>
+</ion-content>

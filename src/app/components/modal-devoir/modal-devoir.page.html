@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Enregistrer un devoir</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="devoir">
+    <ion-item>
+      <ion-label position="stacked">Sélectionner le livre</ion-label>
+      <ion-select [(ngModel)]="devoir.livre">
+        <ion-select-option *ngFor="let livre of livres" value="{{ livre.intitule }}">
+          {{ livre.intitule }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Entrer le numéro de page</ion-label>
+      <ion-input type="text" [(ngModel)]="devoir.numero_page"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Entrer le numéro de l'exercice</ion-label>
+      <ion-input type="text" [(ngModel)]="devoir.numero_exo"></ion-input>
+    </ion-item>
+  </div><br><br>
+
+  <ion-button expand="block" color="primary" (click)="addDevoir(devoir)">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    Enregistrer
+  </ion-button>
+</ion-content>

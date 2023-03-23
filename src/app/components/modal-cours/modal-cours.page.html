@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Enregistrer un cours</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="cours">
+    <ion-item>
+      <ion-label position="stacked">Titre de la leçon</ion-label>
+      <ion-input type="text" [(ngModel)]="cours.titre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description de la léçon</ion-label>
+      <ion-textarea [(ngModel)]="cours.description" rows="3"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Date</ion-label>
+      <ion-input type="date" [(ngModel)]="cours.date"></ion-input>
+    </ion-item>
+  </div><br><br>
+
+  <ion-button expand="block" color="primary" (click)="addCours(cours)">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    Enregistrer
+  </ion-button>
+</ion-content>

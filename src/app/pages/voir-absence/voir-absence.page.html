@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Voir les absences</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" size="large" (click)="btnBack()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h5>Récap des absences</h5>
+
+  <div *ngIf="absenceIsEmpty else loading">
+    <p class="no-absence">Pas d'absences...</p>
+  </div>
+  <ng-template #loading>
+    <ion-searchbar
+      placeholder="Recherchez un élève"
+      [(ngModel)]="searchItem"
+      showCancelButton="focus"
+      animated>
+    </ion-searchbar>
+    <ion-card *ngFor="let absence of absences">
+      <ion-card-header>
+        <ion-card-title>{{ absence.student }}</ion-card-title>
+        <ion-card-subtitle>{{ dateParser(absence.date) }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ absence.periode }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

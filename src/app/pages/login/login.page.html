@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>GESCO</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="share-social"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h5>CONNEXION</h5>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-label position="floating">
+        <ion-icon name="mail-outline"></ion-icon> Entrer une adresse
+      </ion-label>       
+      <ion-input [(ngModel)]="this.email" type="text" placeholder="Email" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">
+        <ion-icon name="key-outline"></ion-icon> Entrer un mot de passe
+      </ion-label>
+      <ion-input [(ngModel)]="this.password" type="password" placeholder="Password" required></ion-input>
+    </ion-item>
+
+    <p class="continue">se connecter en tant que</p>
+    <div class="type-user">
+      <div class="item">
+        <ion-checkbox slot="start"></ion-checkbox>
+        <ion-label>Maître</ion-label>
+      </div>
+      <div class="item">
+        <ion-checkbox slot="start"></ion-checkbox>
+        <ion-label>Parent</ion-label>
+      </div>
+    </div>
+  </ion-list>
+  <br/><br/>
+  <ion-button color="primary" (click)="login()" expand="block">SE CONNECTER</ion-button>
+  <br> 
+  <h5><a class="link" [routerLink]="['/forgot-password']">Mot de passe oublié ?</a></h5>
+</ion-content>
