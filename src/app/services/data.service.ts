@@ -9,14 +9,91 @@ import { Note } from '../modeles/Note';
 import { Student } from '../modeles/Student';
 import { Livre } from '../modeles/Livre';
 import { Matiere } from '../modeles/Matiere';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private http: HttpClient) { }
 
+  getNameStudent() {
+    return this.http.get('http://localhost:8000/api-gesco/get-profile-children');
+  }
+
+  //Methodes for the teacher
+  getStudentsOfTeacher() {
+    return this.http.get('http://localhost:8000/api-gesco/my-students');
+  }
+
+  getNotesStudents() {
+    return this.http.get('http://localhost:8000/api-gesco/notes-students');
+  }
+
+  getNoteStudentById(id: number) {
+    return this.http.get('http://localhost:8000/api-gesco/note-student/'+id);
+  }
+
+  getAbsencesStudents() {
+    return this.http.get('http://localhost:8000/api-gesco/absences-students');
+  }
+
+  getAbsenceStudentById(id: number) {
+    return this.http.get('http://localhost:8000/api-gesco/absence-student/'+id);
+  }
+
+  getDevoirsStudents() {
+    return this.http.get('http://localhost:8000/api-gesco/devoir-students');
+  }
+
+  getDevoirStudentById(id: number) {
+    return this.http.get('http://localhost:8000/api-gesco/devoir-student/'+id);
+  }
+
+  getCoursStudents() {
+    return this.http.get('http://localhost:8000/api-gesco/cours-students');
+  }
+
+  getCourStudentById(id: number) {
+    return this.http.get('http://localhost:8000/api-gesco/cours-student/'+id);
+  }
+
+  addNoteStudent(note: Note) {
+    return this.http.post('http://localhost:8000/api-gesco/add-note', note);
+  }
+
+  addAbsenceStudent(absence: Absence) {
+    return this.http.post('http://localhost:8000/api-gesco/add-absence', absence);
+  }
+
+  addDevoirStudent(devoir: Devoir) {
+    return this.http.post('http://localhost:8000/api-gesco/add-devoir', devoir);
+  }
+
+  addCourStudent(cours: Cours) {
+    return this.http.post('http://localhost:8000/api-gesco/add-cours', cours);
+  }
+
+  //Methodes for the parent
+  getNotesOfChildren() {
+    return this.http.get('http://localhost:8000/api-gesco/get-notes-children');
+  }
+
+  getAbsencesOfChildren() {
+    return this.http.get('http://localhost:8000/api-gesco/get-absences-children');
+  }
+
+  getDevoirsOfChildren() {
+    return this.http.get('http://localhost:8000/api-gesco/get-devoirs-children');
+  }
+
+  getCoursOfChildren() {
+    return this.http.get('http://localhost:8000/api-gesco/get-cours-children');
+  }
+
+
+  //Methodes for Firebase
   getStudents(): Observable<Student[]> {
     const studentsRef = collection(this.firestore, 'students');
     return collectionData(studentsRef, { idField: 'id' }) as Observable<Student[]>;
@@ -58,7 +135,6 @@ export class DataService {
     return updateDoc(AbsenceDocRef,
       {
         student: absence.student,
-        date: absence.date,
         periode: absence.periode
       }
     );
@@ -90,7 +166,6 @@ export class DataService {
     return updateDoc(coursDocRef,
       {
         titre: cours.titre,
-        date: cours.date,
         description: cours.description
       }
     );

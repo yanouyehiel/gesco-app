@@ -11,5 +11,6 @@ export const environment = {
     storageBucket: "gesco-c0130.appspot.com",
     messagingSenderId: "782300571017",
     appId: "1:782300571017:web:b8cff67f399cccb4cb6d58"
-  }
+  },
+  baseUrl: 'http://localhost:8000/api-gesco'
 };

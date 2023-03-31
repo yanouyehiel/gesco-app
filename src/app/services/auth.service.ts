@@ -5,37 +5,84 @@ import { Observable } from 'rxjs';
 import { Parent } from '../modeles/Parent';
 import { Router } from '@angular/router';
 import { Teacher } from '../modeles/Teacher';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-  //private currentParentSubject!: BehaviorSubject<Parent>;
-  //public currentParent!: Observable<Parent>;
+  endpointUrl = environment.baseUrl;
+  LOGIN_URL = this.endpointUrl + '/login';
+  LOGOUT_URL = this.endpointUrl + '/logout';
+  
+  user!: any;
 
   constructor(
     private firestore: Firestore,
-    private router: Router) {
-    //this.currentParentSubject = new BehaviorSubject<Parent>(JSON.parse(localStorage.getItem('currentParent')));
-    //this.currentParent = this.currentParentSubject.asObservable();
+    private router: Router,
+    private http: HttpClient) {
   }
 
-  /*public get currentParentValue(): Parent {
-    return this.currentParentSubject.value;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*'
+    })
   }
 
-  login(email: string, password: string) {
-    return this.http.post<any>(`auth/login`, { email, password })
-    .pipe(map(user => {
-      if (user && user.token) {
-        // store user details in local storage to keep user logged in
-        localStorage.setItem('currentUser', JSON.stringify(user.result));
-        this.currentUserSubject.next(user);
+  login(_email: string, _password: string) {
+
+    const loginData = {
+      email: _email,
+      password: _password,
+      grant_type: 'password',
+      client_id: 2,
+      client_secret: 'EHuLmVk4981Ys8Jj6FpwSD1FEMvSqgMM0auvQaet',
+      scope: '*'
+    }
+
+    return new Observable<boolean>((observer) => {
+      this.http.post(this.LOGIN_URL, loginData, this.httpOptions).subscribe(result => {
+        observer.next(true);
+        observer.complete();
+      }, error => {
+        observer.error(false);
+        observer.complete();
+      })
+    })
+    //return this.http.post('http://localhost:8000/api-gesco/login', data);
+  }
+
+  profile() {
+    return this.http.get('http://localhost:8000/api-gesco/profile').subscribe(
+      (result: any) => {
+        this.user = result.user
+        if (this.user.role_id == 2) {
+          this.router.navigate(['/home'])
+        }
+        if (this.user.role_id == 3) {
+          this.router.navigate(['/home-parent'])
+        }
+      }, err => {
+        localStorage.removeItem('token')
+        this.router.navigate(['/login'])
       }
-     
-      return user;
-    }));
-  }*/
+    );
+  }
+
+  logout() {
+    return new Observable<boolean>((observer) => {
+      this.http.get(this.LOGOUT_URL).subscribe(result => {
+        observer.next(true);
+        observer.complete();
+      }, error => {
+        observer.error(false);
+        observer.complete();
+      })
+    })
+    //return this.http.get('http://localhost:8000/api-gesco/logout');
+  }
 
   async registerParent(parent: Parent) {
     try {

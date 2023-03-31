@@ -12,6 +12,7 @@ export class VoirAbsencePage implements OnInit {
   absences!: Absence[];
   absenceIsEmpty: boolean = true;
   searchItem!: string;
+  name!: string;
 
   dateParser(date: Date) {
     let newDate = new Date(date).toLocaleDateString('fr-FR', {
@@ -20,6 +21,17 @@ export class VoirAbsencePage implements OnInit {
         day: "numeric"
     });
     return newDate;
+  }
+
+  getNameStudent(id: number) {
+    this.dataService.getNameStudent().subscribe(
+      (result: any) => {
+        this.name = result.children.nom + ' ' + result.children.prenom
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
   
   constructor(private router: Router,

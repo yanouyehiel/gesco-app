@@ -14,13 +14,9 @@ import { Observable } from 'rxjs';
 })
 export class GestionAbsencePage implements OnInit {
   @ViewChild(IonModal)
-  modal!: IonModal;
+  name!: string;
   absences!: Absence[];
-  absence: Absence = {
-    student: '',
-    date: new Date(),
-    periode: ''
-  };
+  absence!: Absence;
   absenceIsEmpty: boolean = true;
   searchItem!: string;
 
@@ -33,10 +29,13 @@ export class GestionAbsencePage implements OnInit {
     return newDate;
   }
 
+  nameStudent(student: any) {
+    return student.id === 2;
+  }
+
   constructor(private dataService: DataService,
     private modalCtrl: ModalController,
-    private router: Router,
-    private toastCtrl: ToastController) 
+    private router: Router) 
   { 
     this.dataService.getAbsences().subscribe(res => {
       console.log(res);

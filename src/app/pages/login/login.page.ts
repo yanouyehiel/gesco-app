@@ -6,6 +6,7 @@ import { AlertController, IonCheckbox, LoadingController } from '@ionic/angular'
 import { Parent } from 'src/app/modeles/Parent';
 import { Teacher } from 'src/app/modeles/Teacher';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -13,67 +14,42 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  parents!: Parent[];
-  teachers!: Teacher[];
-  isParent!: IonCheckbox;
-  isTeacher!: IonCheckbox;
   email: string = '';
   password: string = '';
+  wrongCredentials = false;
 
   constructor(
     private fb: FormBuilder,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
-    // this.isParent.checked = true;
-    // this.isTeacher.checked = true;
   }
 
   ngOnInit() {
     
   }
 
-  /*async register() {
-    const loading = await this.loadingCtrl.create();
-    await loading.present();
-    const user = await this.authService.registerParent(this.parent);
-    await loading.dismiss();
+  goToHomeTeacher() {
+    this.router.navigateByUrl('/home', { replaceUrl: true });
+  }
 
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    } else {
-      this.showAlert('L\'inscription a échouée', 'Veuillez réessayer !');
-    }
-  }*/
+  goToHomeParent() {
+    this.router.navigateByUrl('/home-parent', { replaceUrl: true });
+  }
 
   async login() {
+    this.wrongCredentials = false;
     const loading = await this.loadingCtrl.create();
     await loading.present();
-    this.router.navigateByUrl('/home-parent', { replaceUrl: true });
-    /*if (this.isParent.checked) {
-      this.authService.loginParent().subscribe(res => {
-        this.parents = res;
-        console.log(res)
-        if (res.find((element) => (element.email == this.email && element.password == this.password))) {
-          this.router.navigateByUrl('/home', { replaceUrl: true });
-        } else {
-          this.showAlert('La connexion a échoué', 'Identifiants incorrects !');
-        }
-      });
-    }
-    if (this.isTeacher.checked) {
-      this.authService.loginTeacher().subscribe(res => {
-        console.log(res)
-        this.teachers = res;
-        if (res.find((element) => (element.email == this.email && element.password == this.password))) {
-          this.router.navigateByUrl('/home', { replaceUrl: true });
-        } else {
-          this.showAlert('La connexion a échoué', 'Identifiants incorrects !');
-        }
-      });
-    }*/
+    this.authService.login(this.email, this.password).subscribe((result: any) => {
+      localStorage.setItem('token', result.access_token)
+      this.goToHomeTeacher()
+    }, error => {
+      this.wrongCredentials = true;
+    })
     await loading.dismiss();
   }
 

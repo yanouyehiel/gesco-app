@@ -16,7 +16,7 @@
       <ion-label position="floating">
         <ion-icon name="mail-outline"></ion-icon> Entrer une adresse
       </ion-label>       
-      <ion-input [(ngModel)]="this.email" type="text" placeholder="Email" required>
+      <ion-input [(ngModel)]="this.email" type="text" required="">
       </ion-input>
     </ion-item>
 
@@ -24,22 +24,10 @@
       <ion-label position="floating">
         <ion-icon name="key-outline"></ion-icon> Entrer un mot de passe
       </ion-label>
-      <ion-input [(ngModel)]="this.password" type="password" placeholder="Password" required></ion-input>
+      <ion-input [(ngModel)]="this.password" type="password" required=""></ion-input>
     </ion-item>
-
-    <p class="continue">se connecter en tant que</p>
-    <div class="type-user">
-      <div class="item">
-        <ion-checkbox slot="start"></ion-checkbox>
-        <ion-label>Maître</ion-label>
-      </div>
-      <div class="item">
-        <ion-checkbox slot="start"></ion-checkbox>
-        <ion-label>Parent</ion-label>
-      </div>
-    </div>
-  </ion-list>
-  <br/><br/>
+    <p class="error" *ngIf="wrongCredentials">Identifiants incorrects</p>
+  </ion-list><br><br>
   <ion-button color="primary" (click)="login()" expand="block">SE CONNECTER</ion-button>
   <br> 
   <h5><a class="link" [routerLink]="['/forgot-password']">Mot de passe oublié ?</a></h5>

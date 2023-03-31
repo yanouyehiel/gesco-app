@@ -20,30 +20,9 @@ h5 {
     font-weight: bold;
 }
 
-.type-user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.type-user .item {
-    display: flex;
-    justify-content: space-between;
-}
-.type-user .item:nth-child(1) {
-    margin-right: 50px;
-}
-
-.type-user .item ion-checkbox {
-    margin-right: 10px;
-}
-
-p.continue {
-    margin-top: 25px;
-    padding-left: 12%;
-    margin-bottom: 20px;
-    color: #999;
-    opacity: .8;
+.error {
+    color: red;
+    text-align: center;
 }
 
 ion-input {
